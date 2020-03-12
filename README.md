@@ -31,3 +31,17 @@ dotnet run
 # in "ConsoleApp", to "Send" messages to the queue
 dotnet run
 ```
+
+**Using docker compose:**
+
+1. Clone https://github.com/gldraphael/mt-competing-consumer-exp
+2. Add a Azure Service Bus (Standard) connection string to the `.env` file
+3. Build & run the services
+    ```bash
+    docker-compose build
+    docker-compose up
+    ```
+4. Can re-send the messages by running this in another terminal session within the project directory:
+    ```bash
+    docker-compose start console
+    ```
