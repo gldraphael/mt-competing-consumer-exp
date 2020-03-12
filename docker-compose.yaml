@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  # w for worker
+  w1:
+    image: competing-consumer-exp
+    build: 
+      context: .
+      dockerfile: ./WorkerApp/Dockerfile
+    environment:
+      ASB: ${ASB}
+  w2:
+    image: competing-consumer-exp
+    environment:
+      ASB: ${ASB}
+  w3:
+    image: competing-consumer-exp
+    environment:
+      ASB: ${ASB}
+  w4:
+    image: competing-consumer-exp
+    environment:
+      ASB: ${ASB}
+
+  
+  console:
+    build: 
+      context: .
+      dockerfile: ./ConsoleApp/Dockerfile
+    depends_on: [w1, w2, w3, w4]
+    environment:
+      ASB: ${ASB}
