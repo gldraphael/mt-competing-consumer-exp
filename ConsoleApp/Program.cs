@@ -17,6 +17,7 @@ namespace ConsoleApp
             var faker = new Faker();
             var config = new ConfigurationBuilder().AddEnvironmentVariables().AddUserSecrets<Program>().Build();
             var bus = Bus.Factory.CreateUsingAzureServiceBus(sbc => _ = sbc.Host(config.GetValue<string>("ASB")));
+            var queueName = config.GetValue<string>("QueueName");
 
             await bus.StartAsync();
             try
@@ -24,7 +25,7 @@ namespace ConsoleApp
                 for (int i = 0; i < 8; i++)
                 {
                     var command = new DoSomething(@for: faker.Name.FullName());
-                    var endpoint = await bus.GetSendEndpoint(new Uri(bus.Address, Constants.QueueName));
+                    var endpoint = await bus.GetSendEndpoint(new Uri(bus.Address, queueName));
                     await endpoint.Send(command);
                     Log.Information("Sent command {@DoSomething}", command);
                 }

@@ -21,6 +21,7 @@ However in this case:
 ```bash
 cd ConsoleApp
 dotnet user-secrets set "ASB" "--azure-servicebus-connection-string--"
+dotnet user-secrets set "ASB" "mt-queue"
 
 # open 2 or more new terminal instances, 
 # and run the following in each of them

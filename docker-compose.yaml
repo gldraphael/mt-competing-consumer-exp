@@ -4,24 +4,28 @@ services:
 
   # w for worker
   w1:
-    image: competing-consumer-exp
+    image: competing-consumer-exp:debian
     build: 
       context: .
       dockerfile: ./WorkerApp/Dockerfile
     environment:
       ASB: ${ASB}
+      QueueName: ${QueueName}
   w2:
-    image: competing-consumer-exp
+    image: competing-consumer-exp:debian
     environment:
       ASB: ${ASB}
+      QueueName: ${QueueName}
   w3:
-    image: competing-consumer-exp
+    image: competing-consumer-exp:debian
     environment:
       ASB: ${ASB}
+      QueueName: ${QueueName}
   w4:
-    image: competing-consumer-exp
+    image: competing-consumer-exp:debian
     environment:
       ASB: ${ASB}
+      QueueName: ${QueueName}
 
   
   console:
@@ -31,3 +35,4 @@ services:
     depends_on: [w1, w2, w3, w4]
     environment:
       ASB: ${ASB}
+      QueueName: ${QueueName}
