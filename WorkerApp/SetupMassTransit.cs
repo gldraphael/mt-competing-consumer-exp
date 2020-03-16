@@ -8,7 +8,7 @@ namespace WorkerApp
 {
     internal static class MassTransitServiceCollectionExtensions
     {
-        const int PREFETCH_COUNT = 1;
+        const int PREFETCH_COUNT = 0; // should turn Prefetch off on ASB
 
         internal static void SetupMassTransit(this IServiceCollection services, IConfiguration configuration)
         {
