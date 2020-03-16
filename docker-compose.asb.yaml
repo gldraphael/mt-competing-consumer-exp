@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  # w for worker
+  w1:
+    image: competing-consumer-asb-exp:debian
+    build: 
+      context: .
+      dockerfile: ./AsbWorkerApp/Dockerfile
+    environment:
+      ASB: ${ASB}
+      QueueName: ${QueueName}
+  w2:
+    image: competing-consumer-asb-exp:debian
+    environment:
+      ASB: ${ASB}
+      QueueName: ${QueueName}
+  w3:
+    image: competing-consumer-asb-exp:debian
+    environment:
+      ASB: ${ASB}
+      QueueName: ${QueueName}
+  w4:
+    image: competing-consumer-asb-exp:debian
+    environment:
+      ASB: ${ASB}
+      QueueName: ${QueueName}
+
+  
+  console:
+    build: 
+      context: .
+      dockerfile: ./ConsoleApp/Dockerfile
+    depends_on: [w1, w2, w3, w4]
+    environment:
+      ASB: ${ASB}
+      QueueName: ${QueueName}

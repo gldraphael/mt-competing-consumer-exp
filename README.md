@@ -46,3 +46,10 @@ dotnet run
     ```bash
     docker-compose start console
     ```
+
+The expected behavior can be seen when using the Azure Service Bus .NET client directly:
+
+```bash
+docker-compose -f ./docker-compose.asb.yaml build
+docker-compose -f ./docker-compose.asb.yaml up
+```
