@@ -20,9 +20,13 @@ namespace WorkerApp
                 {
                     bc.Host(configuration.GetSection("ASB").Get<string>());
                     bc.PrefetchCount = PREFETCH_COUNT;
+                    bc.MaxConcurrentCalls = 1;
 
                     bc.ReceiveEndpoint(Constants.QueueName, re =>
                     {
+                        bc.PrefetchCount = PREFETCH_COUNT;
+                        bc.MaxConcurrentCalls = 1;
+
                         re.Consumer<DoSomethingConsumer>(provider, c =>
                         {
                             c.UseConcurrentMessageLimit(1);
